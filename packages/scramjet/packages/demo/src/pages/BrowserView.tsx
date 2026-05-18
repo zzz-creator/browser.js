@@ -33,13 +33,25 @@ export const Omnibox: Component = function (cx) {
 		>
 			<div class="browser-omnibox-shell">
 				<div class="omnibox-nav" aria-hidden="true">
-					<button type="button" class="nav-btn">
+					<button
+						type="button"
+						class="nav-btn"
+						on:click={() => browserState.frame?.back()}
+					>
 						<span class="material-symbols-outlined">arrow_back</span>
 					</button>
-					<button type="button" class="nav-btn">
+					<button
+						type="button"
+						class="nav-btn"
+						on:click={() => browserState.frame?.forward()}
+					>
 						<span class="material-symbols-outlined">arrow_forward</span>
 					</button>
-					<button type="button" class="nav-btn" on:click={navigate}>
+					<button
+						type="button"
+						class="nav-btn"
+						on:click={() => browserState.frame?.reload()}
+					>
 						<span class="material-symbols-outlined">refresh</span>
 					</button>
 				</div>
@@ -189,7 +201,7 @@ const BrowserView: Component<
 	};
 	const initPlugin = (frame: Frame) => {
 		const plugin = new ScramjetPlugin("url-watcher");
-		plugin.tap(frame.hooks.frameInit.post, (context, props) => {
+		plugin.tap(frame.hooks.init.post, (context, props) => {
 			if (!context.isTopLevel) return;
 			browserState.url = context.client.url.href;
 			plugin.tap(context.client.hooks.lifecycle.navigate, (context, props) => {

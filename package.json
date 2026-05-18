@@ -17,7 +17,8 @@
 		"lint": "pnpm eslint .",
 		"watch": "rspack build --watch",
 		"format": "prettier --write .",
-		"preinstall": "npx only-allow pnpm"
+		"preinstall": "npx only-allow pnpm",
+		"ii": "pnpm install && pnpm -C packages/scramjet install"
 	},
 	"pnpm": {
 		"overrides": {
